@@ -149,6 +149,10 @@ FRAMEWORK_SEARCH_PATHS = "\"${SRCROOT}/../ModuleContainer.xcframework\"/**";
 
 the compile error is something like this:
 
+<img src="screenshots/build_error.png">
+
+<img src="screenshots/build_error2.png">
+
 ```
 CompileSwift normal x86_64 /Users/kudo/SwiftIssue/App/App/SceneDelegate.swift (in target 'App' from project 'App')
     cd /Users/kudo/SwiftIssue/App
