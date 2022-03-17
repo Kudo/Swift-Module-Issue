@@ -11,19 +11,141 @@ This is a way to specify custom modulemap filename other than the default `modul
 
 # Modules walkthrough
 
-### `App`
+## `ModuleA`
 
-### `ModuleA`
+This project is just a static library with a `ClassA`.
 
-### `ModuleB`
+```objc
+@interface ClassA : NSObject
 
-### `ModuleContainer`
+- (void)methodA;
 
-# How to run this example
+@end
+```
 
-Run this command to compile the `App` target
+To convert this static library as a clang module, this project adds a modulemap file with standard name - `module.modulemap`.
 
-`xcodebuild build -workspace SwiftIssue.xcworkspace -scheme App -sdk iphonesimulator`
+```
+CLANG_ENABLE_MODULES = YES;
+DEFINES_MODULE = YES;
+MODULEMAP_FILE = module.modulemap;
+```
+
+module.modulemap
+
+```
+module ModuleA {
+  umbrella header "ModuleA.h"
+
+  export *
+  module * { export * }
+}
+```
+
+## `ModuleB`
+
+This project is pretty much like the `ModuleA` but having a custom modulemap name - `ModuleB.modulemap` and a different class `ClassB`.
+
+```
+MODULEMAP_FILE = ModuleB.modulemap;
+```
+
+## `ModuleContainer`
+
+This is a Swift Framework project subclassing classes from both `ModuleA` and `ModuleB`.
+
+```swift
+import ModuleA
+import ModuleB
+
+public class ClassAContainer : ModuleA.ClassA {
+  public override func methodA() {
+    print("[ClassContainer] overridden methodA called")
+  }
+}
+
+public class ClassBContainer : ModuleB.ClassB {
+  public override func methodB() {
+    print("[ClassContainer] overridden methodB called")
+  }
+}
+```
+
+To add dependencies to `ModuleA` and `ModuleB`, this project adds these settings:
+
+```
+OTHER_LDFLAGS = ("-lModuleA", "-lModuleB")
+OTHER_CFLAGS = (
+  "$(inherited)",
+  "-fmodule-map-file=\"${SRCROOT}/../ModuleA/ModuleA/module.modulemap\"",
+  "-fmodule-map-file=\"${SRCROOT}/../ModuleB/ModuleB/ModuleB.modulemap\"",
+);
+OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=\"${SRCROOT}/../ModuleA/ModuleA/module.modulemap\" -Xcc -fmodule-map-file=\"${SRCROOT}/../ModuleB/ModuleB/ModuleB.modulemap\""
+```
+
+This project is built as a xcframework by [the commands](https://github.com/Kudo/Swift-Module-Issue/blob/main/build_xcframework.sh) and [comitted into git](https://github.com/Kudo/Swift-Module-Issue/tree/main/ModuleContainer.xcframework)  
+
+## `App`
+
+This project is a iOS app which integrates with all the modules.
+
+```swift
+import ModuleA
+import ModuleB
+import ModuleContainer
+
+@main
+class AppDelegate: UIResponder, UIApplicationDelegate {
+
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    print("[App] create ClassA instance")
+    ModuleA.ClassA().methodA()
+
+    print("[App] create ClassB instance")
+    ModuleB.ClassB().methodB()
+
+    print("[App] create ClassContainer instance")
+    ModuleContainer.ClassContainer().methodA()
+
+    // Override point for customization after application launch.
+    return true
+  }
+}
+```
+
+To add dependencies for ModuleA and ModuleB, the project add these settings:
+
+```
+OTHER_LDFLAGS = ("-lModuleA", "-lModuleB")
+OTHER_CFLAGS = (
+  "$(inherited)",
+  "-fmodule-map-file=\"${SRCROOT}/../ModuleA/ModuleA/module.modulemap\"",
+  "-fmodule-map-file=\"${SRCROOT}/../ModuleB/ModuleB/ModuleB.modulemap\"",
+);
+OTHER_SWIFT_FLAGS = "$(inherited) -Xcc -fmodule-map-file=\"${SRCROOT}/../ModuleA/ModuleA/module.modulemap\" -Xcc -fmodule-map-file=\"${SRCROOT}/../ModuleB/ModuleB/ModuleB.modulemap\""
+SWIFT_INCLUDE_PATHS = "\"${SRCROOT}/../ModuleA/ModuleA\" \"${SRCROOT}/../ModuleB/ModuleB\"";
+```
+
+However, this project add dependency to ModuleContainer through the prebuild `ModuleContainer.xcframework`.
+
+```
+FRAMEWORK_SEARCH_PATHS = "\"${SRCROOT}/../ModuleContainer.xcframework\"/**";
+```
+
+# Result of module resolutions
+
+- ✅ ModuleContainer -> ModuleA
+  - by `-fmodule-map-file=`
+- ✅ ModuleContainer -> ModuleB
+  - by `-fmodule-map-file=`
+- ✅ App -> ModuleA
+  - by `-fmodule-map-file=`
+- ✅ App -> ModuleB
+  - by `-fmodule-map-file=`
+- ✅ App -> ModuleContainer (swiftinterface) -> ModuleA
+  - swiftinterface doesn't respect `-fmodule-map-file=`. since `ModuleA` has the standard `module.modulemap` name. ModuleA is still reachable by `SWIFT_INCLUDE_PATHS = "\"${SRCROOT}/../ModuleA/ModuleA\" \"${SRCROOT}/../ModuleB/ModuleB\"";`.
+- ❌ App -> ModuleContainer (swiftinterface) -> ModuleB
+  - swiftinterface doesn't respect `-fmodule-map-file=`. ModuleB has custom modulemap name `ModuleB.modulemap` is not reachable.
 
 the compile error is something like this:
 
@@ -48,6 +170,12 @@ import ModuleB
         ^
 ```
 
-## Rebuild `ModuleContainer.xcframework`
+# How to run this example
+
+Run this command to compile the `App` target
+
+`xcodebuild build -workspace SwiftIssue.xcworkspace -scheme App -sdk iphonesimulator`
+
+### Rebuild `ModuleContainer.xcframework`
 
 The prebuilt `ModuleContainer.xcframework` is committed into git. If you want to rebuild the xcframework, you can run the `build_xcframework.sh` script.
