@@ -6,6 +6,6 @@ framework module ModuleContainer {
 }
 
 module ModuleContainer.Swift {
-    header "ModuleContainer-Swift.h"
-    requires objc
+  header "ModuleContainer-Swift.h"
+  requires objc
 }

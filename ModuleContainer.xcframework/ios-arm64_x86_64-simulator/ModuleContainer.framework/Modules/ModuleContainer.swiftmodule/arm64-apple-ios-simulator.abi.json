@@ -1,0 +1,271 @@
+{
+  "ABIRoot": {
+    "kind": "Root",
+    "name": "TopLevel",
+    "printedName": "TopLevel",
+    "children": [
+      {
+        "kind": "Import",
+        "name": "ModuleA",
+        "printedName": "ModuleA",
+        "declKind": "Import",
+        "moduleName": "ModuleContainer"
+      },
+      {
+        "kind": "Import",
+        "name": "ModuleB",
+        "printedName": "ModuleB",
+        "declKind": "Import",
+        "moduleName": "ModuleContainer"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ClassAContainer",
+        "printedName": "ClassAContainer",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "methodA",
+            "printedName": "methodA()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ModuleContainer@objc(cs)ClassAContainer(im)methodA",
+            "mangledName": "$s15ModuleContainer15ClassAContainerC7methodAyyF",
+            "moduleName": "ModuleContainer",
+            "overriding": true,
+            "objc_name": "methodA",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ClassAContainer",
+                "printedName": "ModuleContainer.ClassAContainer",
+                "usr": "c:@M@ModuleContainer@objc(cs)ClassAContainer"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ModuleContainer@objc(cs)ClassAContainer(im)init",
+            "mangledName": "$s15ModuleContainer15ClassAContainerCACycfc",
+            "moduleName": "ModuleContainer",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ModuleContainer@objc(cs)ClassAContainer",
+        "mangledName": "$s15ModuleContainer15ClassAContainerC",
+        "moduleName": "ModuleContainer",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ClassA",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ModuleA.ClassA",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ClassBContainer",
+        "printedName": "ClassBContainer",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "methodB",
+            "printedName": "methodB()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@ModuleContainer@objc(cs)ClassBContainer(im)methodB",
+            "mangledName": "$s15ModuleContainer15ClassBContainerC7methodByyF",
+            "moduleName": "ModuleContainer",
+            "overriding": true,
+            "objc_name": "methodB",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ClassBContainer",
+                "printedName": "ModuleContainer.ClassBContainer",
+                "usr": "c:@M@ModuleContainer@objc(cs)ClassBContainer"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "c:@M@ModuleContainer@objc(cs)ClassBContainer(im)init",
+            "mangledName": "$s15ModuleContainer15ClassBContainerCACycfc",
+            "moduleName": "ModuleContainer",
+            "overriding": true,
+            "implicit": true,
+            "objc_name": "init",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:@M@ModuleContainer@objc(cs)ClassBContainer",
+        "mangledName": "$s15ModuleContainer15ClassBContainerC",
+        "moduleName": "ModuleContainer",
+        "declAttributes": [
+          "AccessControl",
+          "ObjC"
+        ],
+        "superclassUsr": "c:objc(cs)ClassB",
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "ModuleB.ClassB",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          }
+        ]
+      }
+    ],
+    "json_format_version": 8
+  },
+  "ConstValues": []
+}
