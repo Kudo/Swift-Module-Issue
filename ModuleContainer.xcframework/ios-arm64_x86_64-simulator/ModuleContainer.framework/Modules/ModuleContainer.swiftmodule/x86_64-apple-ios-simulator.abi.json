@@ -267,5 +267,20 @@
     ],
     "json_format_version": 8
   },
-  "ConstValues": []
+  "ConstValues": [
+    {
+      "filePath": "\/Users\/kudo\/Swift-Module-Issue\/ModuleContainer\/ModuleContainer\/ClassContainer.swift",
+      "kind": "StringLiteral",
+      "offset": 124,
+      "length": 44,
+      "value": "\"[ClassContainer] overridden methodA called\""
+    },
+    {
+      "filePath": "\/Users\/kudo\/Swift-Module-Issue\/ModuleContainer\/ModuleContainer\/ClassContainer.swift",
+      "kind": "StringLiteral",
+      "offset": 270,
+      "length": 44,
+      "value": "\"[ClassContainer] overridden methodB called\""
+    }
+  ]
 }
